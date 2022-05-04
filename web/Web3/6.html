@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* inline요소는 width 수정불가. 단, 이미지는 예외 */
+        img{
+            width: 250px;
+            height: 250px;
+        }
+        a{
+            width: 100px;
+            border: 1px solid gray;
+            display: inline-block;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+        }
+        a:hover{
+            background-color: navy;
+            color: white;
+        }
+        h1{
+            /*display: none;*/
+            /* 공간을 차지하지 않고 안보임 */
+            visibility: hidden;
+            /* 공간은 차지하고 보이지 않음 */
+        }
+    </style>
+</head>
+<body>
+<h1>Block 요소와 inline요소</h1>
+<img src="../images/muffin.png" alt="">
+<img src="../images/automobile.svg" alt="">
+<img src="../images/kids.jpg" alt="">
+<a href="1.html">1문서</a>
+<a href="2.html">2문서</a>
+<a href="3.html">3문서</a>
+<a href="4.html">4문서</a>
+<a href="5.html">5문서</a>
+
+</body>
+</html>
