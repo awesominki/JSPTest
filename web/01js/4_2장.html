@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>기본문법</h1>
+<hr>
+<button onclick="call();">논리연산자</button>
+<button onclick="call2();">논리연산자2</button>
+<button onclick="call3();">식별자 재선언</button>
+<button onclick="call4();">(BOM)window객체의 모든정보</button>
+<input type="text" id="phone" value="">
+<button onclick="call5();">Prompt</button>
+<button onclick="call6();">Confirm</button>
+<button onclick="call7();">문자와 숫자혼합</button>
+<button onclick="call8();">타입 변형</button>
+<button onclick="call9();">타입 변형(Boolean)</button>
+<hr>
+<div id="here">여기</div>
+<script>
+    var obj = document.querySelector("#here");
+    function call(){
+        //&&는 앞에 결과가 틀리면 뒤 조건식을 수행하지 않음. (자바와 같다)
+        //&는 앞에 결과와 무관하게 뒤 조건식을 수행 (결과가 number 1,0)
+        var a = 100;
+        obj.innerHTML = a > 20 & ++a > 30;
+        obj.innerHTML += "<br>" + a;
+    }
+    function call2(){
+        obj.innerHTML = 30>20>10; //30>20 -> true -> 1
+    }
+    function  call3(){
+        var aa = "식별자 재선언";
+        alert(alert);
+    }
+    function call4(){
+        for(var pro in window){
+            obj.innerHTML += "<br>" + pro + "==>";
+        }
+    }
+    function call5(){
+        var phoneObj = document.getElementById("phone");
+        var myPhone = phoneObj.value;
+        if(myPhone==""){
+            //alert("전화번호를 입력하세요.");
+            var inputData = prompt("전화번호를 입력하세요.","010");
+            phoneObj.value = inputData;
+            phoneObj.focus();
+        }
+    }
+    function call6(){
+        var result = confirm("수락?");
+        if(result){
+            obj.innerHTML = "감사합니다.";
+        }else{
+            obj.innerHTML = "다음기회에.";
+        }
+        obj.innerHTML += result?"감사합니다.":"다음기회에.";
+    }
+    function  call7(){
+        obj.innerHTML = 100 + '200';
+        obj.innerHTML += '<br>' +'100' + '200';
+        obj.innerHTML += '<br>' + 100 * '200';
+        obj.innerHTML += '<br>' + '100' * '200';
+    }
+    function  call8() {
+        var a = '500달러';
+        var b = 1000;
+        obj.innerHTML = Number(a)+b + '<br>';
+        obj.innerHTML += parseInt(a)+b + '<br>';
+        obj.innerHTML += a * String(b) + '<br>';
+        obj.innerHTML += parseInt(a) * String(b) + '<br>';
+    }
+    function  call9(){
+        obj.innerHTML += "<br>" + Boolean(0);
+        obj.innerHTML += "<br>" + Boolean("");
+        obj.innerHTML += "<br>" + Boolean(NaN);
+        obj.innerHTML += "<br>" + Boolean(null);
+        obj.innerHTML += "<br>" + Boolean(undefined);
+        obj.innerHTML += "<br>" + Boolean(10);
+        obj.innerHTML += "<br>" + Boolean("aa") + "<br>";
+        obj.innerHTML += 0 == false;
+        obj.innerHTML += 10 === "10";
+    }
+</script>
+</body>
+</html>

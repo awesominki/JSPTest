@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<hr>
+<h1>3장 조건문</h1>
+<h1>123</h1>
+<hr>
+<button id="btn1">동적 element 생성</button>
+<button id="btn2">제목 수정</button>
+<br>
+<input type="text" id="num1" value="">
+<button id="btn3">LAB1..양수,음수</button>
+<br>
+<button id="btn4">LAB2..짝수,홀수</button>
+<br>
+<button id="btn5">LAB3..성적</button>
+<br>
+<button id="btn6">LAB3..성적(switch)</button>
+<hr>
+<div id="here">여기</div>
+
+
+
+<script>
+    document.getElementById("btn1").onclick = function (){
+        var str = `
+             <ul>
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+                <li>JSP/Servlet</li>
+            </ul> `;
+        document.querySelector("#here").innerHTML = str;
+    };
+    document.getElementById("btn2").onclick = function (){
+        document.querySelector("h1").innerHTML = "3장 조건문 제목 수정";
+    }
+    document.getElementById("btn3").onclick = function (){
+        var num = document.getElementById("num1").value;
+        if(num > 0){
+            document.querySelector("#here").innerHTML = "양수";
+        }else if(num == 0){
+            document.querySelector("#here").innerHTML = "0";
+        }else{
+            document.querySelector("#here").innerHTML = "음수";
+        }
+    }
+    document.getElementById("btn4").onclick = function (){
+        var num = prompt("숫자를 입력하세요");
+        var result;
+        if(num%2==0){
+            result = "짝수";
+        } else{
+            result = "홀수";
+        }
+        document.querySelector("#here").innerHTML = result;
+    }
+    document.getElementById("btn5").onclick = function (){
+        var data = prompt("값을 입력하세요(100,99,98)");
+        var arr = data.split(",");
+        var total = 0;
+        var result;
+        for(let index in arr){
+            total += Number(arr[index]);
+        }
+        total /= 3;
+        if(total >= 90){
+            result = "수";
+        }else if(total >= 80){
+            result = "우";
+        }else if(total >= 70){
+            result = "미";
+        }else if(total >= 60){
+            result = "양";
+        }else{
+            result = "가";
+        }
+        document.querySelector("#here").innerHTML = `당신의 평균은 ${total}이고 , 학점은 ${result} 입니다.`;
+    }
+    document.getElementById("btn6").onclick = function (){
+        var data = prompt("값을 입력하세요(100,99,98)");
+        var arr = data.split(",");
+        var total = 0;
+        var result;
+        for(let index in arr){
+            total += Number(arr[index]);
+        }
+        total /= 30;
+        total = Math.floor(total);
+        switch (total) {
+            case 10:
+            case 9:
+                result = "수";
+                break;
+            case 8:
+                result = "우";
+                break;
+            case 7:
+                result = "미";
+                break;
+            case 6:
+                result = "양";
+                break;
+            default:
+                result = "가";
+                break;
+
+        }
+        document.querySelector("#here").innerHTML = `당신의 학점은 ${result} 입니다.`;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            margin : 10px;
+            border: 1px solid blue;
+            padding : 10px;
+        }
+    </style>
+    <script>
+        //호이스팅 : var, function() 을 맨먼저 수행
+        alert("global v1=" + v1);
+        call2();
+        var v1 = 1000;
+        window.onload = function() {
+            obj = document.querySelector("#here");
+        }
+        function call1() {
+            var a=10;
+            var b="자바스크립트";
+            //obj.innerHTML = "a=" + a + "<br>b=" + b;
+            obj.innerHTML = `a=${a} <br> b=${b}`;
+        }
+        function call2(){
+            //호이스팅 : var 변수선언을 찾아 먼저 수행해낸다(함수의 맨위로 올린다).
+            obj.innerHTML = a; //undefined
+            var a = 100;
+            obj.innerHTML += "<br>" + a;
+            var a = 200;
+            obj.innerHTML += "<br>" + a;
+        }
+        function call2(){
+            alert("call2함수추가");
+        }
+        function  call3(){
+            var num1 = 10;
+            num2 = 20; //전역변수
+            //let은 블럭 내에서만 유효!!!!!!!!
+            for(let num3=1;num3<=10;num3++){
+                obj.innerHTML += "<br>num3 = " + num3;
+            }
+            //num3 is not defined
+            obj.innerHTML += "<br>loop 이후에 num3 = " + num3;
+        }
+        function  call4(){
+            obj.innerHTML = num2 + num3;
+        }
+        function  call5(){
+            const MAX = 1000;
+            obj.innerHTML = MAX;
+            alert("MAX는 \"!!!!\" " + MAX + '입니다.');
+        }
+    </script>
+</head>
+<body>
+<h1>JavaScript 변수와 함수 사용</h1>
+<hr>
+<button onclick="call1();">변수 선언, 백틱 사용</button>
+<button onclick="call2();">호이스팅</button>
+<button onclick="call3();">의도하지 않은 전역변수</button>
+<button onclick="call4();">의도하지 않은 전역변수 접근</button>
+<button onclick="call5();">상수</button>
+<div id="here">여기</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- HTML : 구조적 data(계층구조를 갖는 웹데이터)
+   CSS : display 담당(모양)
+   JavaScript : 동작담당(사용자의 행위에 의해 문서가 달라지도록 한다.)
+   -->
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="common.css" rel="stylesheet" type="text/css">
+    <style>
+        h1{
+            background-color: orange;
+        }
+        #here{
+            border: 1px solid blue;
+        }
+    </style>
+    <script>
+        alert("1. head에 작성");
+        console.log("1. head에 작성");
+    </script>
+    <script>
+        alert("2. head에 작성");
+        console.log("2. head에 작성");
+        function call(){
+            document.getElementById("here").innerHTML += "<h1>KOSTA</h1>";
+        }
+    </script>
+<!-- 외부 스크립트 연결할때는 태그안에 아무것도 쓰면 안된다. -->
+    <script src="external.js"></script>
+    <script>
+        f1();
+        f2();
+    </script>
+</head>
+<body onload="call();">
+<script>
+    alert("3. body 시작에 작성");
+    console.log("3. body 시작에 작성");
+</script>
+<h1>자바 스크립트의 표준은 ECMA Script 이다.</h1>
+<button onclick="alert('버튼누름');">버튼</button>
+<div id="here">여기</div>
+<script>
+    alert("4. body 끝에 작성");
+    console.log("4. body 끝에 작성");
+
+</script>
+</body>
+</html>

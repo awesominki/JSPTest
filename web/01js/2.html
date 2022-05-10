@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+<!-- JavaScript 변수 var을 붙히면 지역변수 var이 없으면 전역변수 -->
+        var a = 10; // 함수내의 변수가 아니므로 전역변수
+        b = 20;
+        function call(){
+            var c = 30; //지역변수
+            d = 40; //전역변수
+            alert(a+b+c+d);
+        }
+        function call2(){
+            //c -> not defined ( 선언 되지 않음 )
+            // alert(a+b+c+d);
+            d = "자바스크립트";
+            alert(a+b+d);
+        }
+        function call3(){
+            alert(d);
+        }
+        function call4(){
+            var v1;
+            document.getElementById("here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>"; //id로 접근하기
+            document.getElementsByClassName("my")[0].innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>"; //클래스로 접근하기
+            document.getElementsByName("myname")[0].innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>"; //name으로 접근하기
+            document.querySelector("#here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>"; // ECMAScript6 에서 추가된 id접근방법 ( 권장 )
+            document.querySelector(".my").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>"; // ECMAScript6 에서 추가된 class접근방법 ( 권장 )
+            document.querySelector("div[name='myname']").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>"; // ECMAScript6 에서 추가된 name접근방법 ( 권장 )
+            v1 = 10 > 20;
+            document.getElementById("here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>";
+            v1 = 10;
+            document.getElementById("here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>";
+            v1 = 3.14;
+            document.getElementById("here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>";
+            v1 = "자바 스크립트";
+            document.getElementById("here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>";
+            v1 = [1,2,3,4,5]; //배열
+            document.getElementById("here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>";
+            v1 = {name:'jj',phone:"010-1234-5678"}; //객체
+            document.getElementById("here").innerHTML += "<p>" + v1["name"] + "-->" + typeof(v1) + "</p>";
+            document.getElementById("here").innerHTML += "<p>" + v1.phone + "-->" + typeof(v1) + "</p>";
+            v1 = function (){ a=10; }
+            document.getElementById("here").innerHTML += "<p>" + v1 + "-->" + typeof(v1) + "</p>";
+        }
+    </script>
+</head>
+<body>
+<h1 >JavaScript 변수</h1>
+<hr>
+<button onclick="call();">버튼 1</button>
+<button onclick="call2();">버튼 2</button>
+<button onclick="call3();">버튼 3</button>
+<button onclick="call4();">버튼 4</button>
+<hr>
+<div id="here" class="my" name="myname">여기</div>
+</body>
+</html>
