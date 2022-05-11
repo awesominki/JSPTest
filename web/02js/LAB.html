@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="form">
+    <fieldset>
+        <legend>개인정보</legend>
+        <label for="jumin1">주민번호</label>
+        <input type="text" name="jumin1" id="jumin1" size="6"  maxlength="6"
+               onkeyup="focusChange(this);" /> -
+        <input type="text" name="jumin2" id="jumin2" size="7" maxlength="7"
+               onblur="genderCheck( this.value , form )"/> <br/> <br/>
+        <div id="display"> </div>
+        <label for="gender">성별</label>
+        <input type="radio" name="gender"   value="man"
+               checked="checked" disabled="disabled"/>남자
+        <input type="radio" name="gender"   value="woman"
+               disabled="disabled"/>여자
+
+        <input type="button" value="check" onclick="check()" />
+    </fieldset>
+
+</form>
+<script>
+    function focusChange(obj){
+        if(obj.value.length == 6){
+            document.getElementById("jumin2").focus();
+        }
+        //length가 6자리이면 focus이동하기
+    }
+    function genderCheck(jumin2,obj){
+        //첫번째 자리가 1,3 이면 남, 2,4 이면 여
+        if(jumin2.length != 7){
+            alert("7자리 입력 필수");
+            document.querySelector("#jumin2").focus();
+            return;
+        }
+        var first = jumin2.substr(0,1);
+        if(first == 1 || first == 3){
+            //obj.gender(0).checked = true;
+            document.querySelector("#man").checked = "checked";
+        }else{
+            //obj.gender(1).checked = true;
+            document.querySelector("#woman").checked = "checked";
+        }
+    }
+
+</script>
+</body>
+</html>

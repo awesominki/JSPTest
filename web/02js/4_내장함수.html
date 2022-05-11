@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var arr = ["yellow","lightgreen","hotpink","lightblue"];
+
+        window.onload = function (){
+            here.innerHTML = "자바스크립트 내장함수 연습하기";
+            call();
+            btn1.onclick = call;
+            btn2.onclick = call2;
+            btn3.onclick = call3;
+            btn4.onclick = call4;
+            btn5.onclick = call5;
+            btn6.onclick = call6;
+            btn7.onclick = call7;
+            btn8.onclick = call8;
+
+        };
+        window.onmousemove = function (){
+            clearInterval(interval);
+        };
+        function call(){
+            interval = setInterval(()=>{
+                var su = Math.floor(Math.random()*arr.length);
+                document.bgColor = arr[su];
+            },2000);
+        }
+        function call2(){
+            var uri = "http://localhost:8080/JSPTest_war_exploded/02js/4_내장함수.html";
+            var result = encodeURIComponent(uri);
+            here.innerHTML = result;
+            here.innerHTML += "<br>" + decodeURIComponent(result);
+        }
+        function call3(){
+            var str = "var a=10; var b=20; alert(a+b);";
+            here.innerHTML = str;
+            eval(str);
+        }
+        function call4(){
+            var a = document.querySelector("#num1").value;
+            var op = document.querySelector("#op").value;
+            var b = document.querySelector("#num2").value;
+            var result = a + op + b;
+            document.querySelector("#result").value = eval(result);
+        }
+        function call5(){
+            var a = NaN;
+            var b = NaN;
+            here.innerHTML = isNaN(a) == isNaN(b);
+        }
+        function call6(){
+            //test(10,20,30);
+            test(10);
+        }
+        function test(a,b,c){
+            //alert(!Boolean(b));
+            if(!b) b =200;
+            if(!c) c =300;
+            here.innerHTML = a+b+c;
+        }
+        function test(a,b,c){
+            b = b || 1000;
+            c = c || 2000;
+            here.innerHTML = a+b+c;
+        }
+        function test(a,b=1,c=2){
+            here.innerHTML = a+b+c;
+        }
+        function call7(){
+            //1.익명함수
+            var f = function (a,b){return a+b};
+            //2.화살표함수...익명함수의 표현을 단순화하는것
+            var f2 = (a,b)=>a+b;
+            here.innerHTML = f(1,2) + "<br>" + f2(100,200);
+        }
+        function call8(){
+            call9(1,2,3);
+            var arr = [100,200,300];
+            call9(...arr);
+        }
+        function call9(...nums){
+            //here.innerHTML = arguments[0] + arguments[1] + arguments[2];
+            here.innerHTML = nums[0] + nums[1] + nums[2];
+        }
+
+    </script>
+</head>
+<body>
+<h1>자바스크립트 내장함수</h1>
+<button id="btn1">배경색 바꾸기</button>
+<button id="btn2">encode</button>
+<button id="btn3">eval</button>
+<hr>
+<input type="number" id="num1">
+<select id="op">
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+    <option>%</option>
+</select>
+<input type="number" id="num2">
+<button id="btn4">=</button>
+<input type="number" id="result">
+<hr>
+<button id="btn5">isNaN</button>
+<button id="btn6">기본 매개변수</button>
+<button id="btn7">익명함수와 화살표 함수</button>
+<button id="btn8">전개 연산자</button>
+<hr>
+<div id="here"></div>
+</body>
+</html>

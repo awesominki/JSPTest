@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li:hover{
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+<h1>함수연습(사용자 정의함수)</h1>
+<ul>
+    <li id="li1">1. 이름있는 함수(일반적)</li>
+    <li id="li2">2. 이름없는 함수(익명함수)</li>
+    <li id="li3">3. callback함수</li>
+    <li id="li4">4. 재정의함수</li>
+    <li id="li5">5. 함수의 매개변수</li>
+    <li id="li6">6. 함수의 매개변수 Array()</li>
+    <li id="li7">7. 함수의 return</li>
+    <li id="li8">8. callback함수</li>
+</ul>
+<hr>
+<div id="here"></div>
+<script>
+    alert(pythgoras());
+    function pythgoras(){
+        var width=3;
+        var height=4;
+        here.innerHTML += "<br>pythgoras test...";
+        return Math.sqrt(square(width) + square(height));
+        function square(xx){
+            return xx*xx;
+        }
+    }
+
+    function square(xx, yy){
+        return xx*yy;
+    }
+
+    function myFunction(a){
+        here.innerHTML += "myFunction시작";
+
+
+        if(a>10) return;
+        here.innerHTML += "myFunction종료";
+
+        //return; 생략가능
+    }
+    function myFunction2(a){
+        here.innerHTML += "myFunction시작";
+
+
+        if(a>10) return "OK";
+        here.innerHTML += "myFunction종료";
+
+        //return; 생략가능
+    }
+</script>
+<script type="text/javascript">
+    li8.onclick = function (){
+        function call(f){
+            f();
+            f();
+        }
+
+        call(function (){
+            here.innerHTML += "<br>callback함수 test....";
+        });
+        call(pythgoras);
+    }
+    li7.onclick = function (){
+        myFunction();
+        var result = myFunction2();
+        here.innerHTML += "<br> result =" + result;
+    }
+
+    li6.onclick = function (){
+        var arr1 = Array();
+        var arr2 = Array(10);
+        var arr3 = Array(1,2,3,4,88,99);
+        here.innerHTML += "<br>" + typeof (arr1) + " : " + arr1.length;
+        here.innerHTML += "<br>" + typeof (arr2) + " : " + arr2.length;
+        here.innerHTML += "<br>" + typeof (arr3) + " : " + arr3.length;
+
+
+        sumAll();
+        sumAll(1,2,3,4,5);
+        sumAll(100,200);
+        sumAll("자바스크립트","HTML5");
+        //자바 스크립트는 함수 overloading불가, override만 가능
+        function sumAll(){
+            //arguments객체가 내장되어있다.
+            var total = 0;
+            for(let index in arguments){
+                total += arguments[index];
+            }
+            here.innerHTML += "<br>" + total;
+        }
+    }
+
+    li5.onclick = function (){
+        function call(a,b,c){
+            here.innerHTML += "<br>a=" + a;
+            here.innerHTML += "<br>b=" + b;
+            here.innerHTML += "<br>c=" + c;
+            here.innerHTML += "<hr>";
+        }
+        call();
+        call(10);
+        call(20,30);
+        call(40,50,60);
+        call(40,50,60,999);
+
+    }
+
+    li4.onclick = function (){
+        alert(typeof (f1));
+        f1();
+        function f1(){
+            alert("1");
+        }
+        function f1(){
+            alert("2");
+        }
+
+        var f1 = function(){
+            alert("3");
+        };
+
+        f1();
+
+    }
+
+    li3.onclick = function (){
+        //callback : 함수가 매개변수로 전달되고 , 받을쪽에서 호출한다.
+        setInterval(function (){
+            here.innerHTML = new Date();
+        },1000)
+    };
+
+    li2.onclick = function (){
+        (function (){
+            var obj = document.getElementById("li2");
+            here.innerHTML = obj.innerHTML;
+        })();
+        var aa = function (){
+            here.innerHTML += "<br>이름없는 함수(익명함수) 추가";
+        };
+        here.innerHTML += "<br>" + aa;
+        aa();
+    }
+    li1.onclick = function (){
+        f1();
+        function f1(){
+            here.innerHTML = "이름있는 함수(일반적)";
+            here.innerHTML += "<br>함수내의 함수는 내부함수";
+
+        }
+    }
+</script>
+</body>
+</html>

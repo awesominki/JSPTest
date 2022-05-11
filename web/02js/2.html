@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function call(){
+            here.innerHTML = "callback함수1";
+            call2(function (){
+                return 100;
+            });
+            call2(function (){
+                return "JavaScript";
+            })
+            call2(call3);
+        }
+        function call2(f){
+            here.innerHTML += "<br>" + f + "-->" + f();
+        }
+        function call3(){
+            var a=10;
+            var b=20;
+            return a+b;
+        }
+
+        function test(){
+            setInterval(timeDisplay,1000);
+            function timeDisplay(){
+                here.innerHTML = new Date();
+            }
+
+        }
+
+        function example(){
+            var result = test3();
+            here.innerHTML += result;
+            result();
+        }
+        function test3(){
+            var a = 10;
+            return function (){
+               here.innerHTML += "<br>" + ++a;
+            };
+        }
+        function  test4(param){
+            var output = "Hello~~~~" + param;
+            return function (){
+                return output;
+            };
+        }
+        function example2(){
+            var f1 = test4("Java");
+            var f2 = test4("HTML5");
+            here.innerHTML = f1() + "<br>" + f2();
+        }
+        function  test5(param){
+            var su = param;
+            return function (){
+                su++;
+                return su;
+            };
+        }
+        var num_func1 = test5(0);
+        var num_func2 = test5(100);
+        function example3(){
+            here.innerHTML = num_func1();
+        }
+        function example4(){
+            here.innerHTML = num_func2();
+        }
+        var result = add();
+        function add(){
+            var num = 0;
+            return function(){num++; return num;};
+        }
+        function example5(){
+
+            here.innerHTML = result();
+        }
+    </script>
+</head>
+<body>
+<h1>함수 연습</h1>
+<ol>
+    <li><a href="javascript:call();">callback함수1</a> </li>
+    <li><a href="1.html">link(page)연결</a> </li>
+    <li><a href="javascript:test();">callback함수3</a> </li>
+    <li><a href="javascript:example();">클로저1(지역변수사용위배)</a> </li>
+    <li><a href="javascript:example2();">클로저2(지역변수사용위배)</a> </li>
+    <li><button onclick="example3()">0부터 1씩증가</button></li>
+    <li><button onclick="example4()">100부터 1씩증가</button></li>
+    <li><button onclick="example5()">counter</button></li>
+
+</ol>
+<hr>
+<div id="here"></div>
+</body>
+</html>
