@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="external.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	//onclick : 이벤트속성
+	//f1~f6 은 이벤트발생시 수행할 기능 event handler
+	btn1.onclick = f1;
+	btn2.onclick = f2;
+	btn3.onclick = f3;
+	btn4.onclick = f4;
+	btn5.onclick = f5;
+	btn6.onclick = f6;
+	btn7.onclick = f7;
+	btn8.onclick = f8;
+	btn9.onclick = f9;
+	btn10.onclick = f10;
+};
+function Phone(model,b){
+	this.model = model; //var은 자바의 private와 유사
+	this.price = b;
+}
+Phone.prototype.getModel = function(){return this.model;};
+Phone.prototype.toString=function(){return "model:" + this.model + "price:" + this.price
+	;}
+function f1(){
+	var phones = [new Phone("ccc",300)]; //배열 (폰 추가하고싶을때)
+	var p1 = new Phone("ABC",100);
+	phones.push(p1); //p1배열에 push해라
+	phones.push(new Phone("Ddd",200)); //p1배열에 push해라
+
+	for(var index in phones){
+		here.innerHTML += "<hr>" + phones[index];
+	}
+	here.innerHTML += "<hr>" + p1.model;
+}
+function f2(){
+	var a = 3.141652;
+	var b = new Number(3.141652);
+	//자바는 int(기본형), Integer(기본형+기능추가->wrapper class)가 다르다
+	//자바스크립트는 기본형도 기능을 객체와 같이 가능사용가능
+	//객체는 기능추가 가능
+	here.innerHTML += "<hr>" + a.toFixed(3);
+	here.innerHTML += "<hr>" + a.myProperty;
+	here.innerHTML += "<hr>" + typeof(a) + ":" + typeof(b);
+	
+	a.myFunction = function(){ return 111; }; //메서드추가
+	a.myProperty = 999; //속성추가
+	here.innerHTML += "<hr>" + a.myFunction();
+}
+function f3(){
+	var a = {};
+	var b = new Object();
+	here.innerHTML += "<hr>" + a;
+	a.toString = function(){ return "toString재정의";};
+	here.innerHTML += "<hr>" + a.toString();
+}
+function f4(){
+	var a = "Hello";
+	var b = new String("Hello");
+	here.innerHTML += "<hr>" + typeof(a) + ":" + typeof(b);
+	here.innerHTML += "<hr>" + a.length;
+	here.innerHTML += "<hr>" + a.chatAt(0);
+	here.innerHTML += "<hr>" + a.substr(0,3); //Hel
+	here.innerHTML += "<hr>" + a.subString(2,4); //ll
+	here.innerHTML += "<hr>" + a.replace("~","!!!!");
+}
+function f5(){
+	var arr1 = [10,20,30];
+	var arr2 = [40,50,60];
+	arr1 = arr1.concat(arr2);
+	here.innerHTML += "<hr>" + arr1;
+	//배열을 문자열로 만들기
+	here.innerHTML += "<hr>" + arr1.join("**");
+	arr1.sort(); //어샌딩소트
+	here.innerHTML += "<hr>" + arr1;
+	arr1.sort(function(a,b){ //디샌딩소트
+		return b-a;
+	});
+	here.innerHTML += "<hr>" + arr1;
+	arr1.sort( (a,b)=>a-b); //람다식 다시어샌딩
+	here.innerHTML += "<hr>" + arr1;
+	arr1.reverse();
+	here.innerHTML += "<hr>" + arr1;
+}
+function f6(){
+	var arr = call6();
+	
+	arr.sort(function(a,b){
+		return b.getSum() - a.getSum();
+	});
+	here.innerHTML += "<hr>"
+	for(var index in arr.slice(0,3)){
+		here.innerHTML += arr[index];
+	}
+	//문자로 어샌딩소트하기
+	arr.sort(function(a,b){ //asc : -1 0 1
+		if(a.name==b.name) return 0;
+		if(a.name>b.name) return 1;
+		return -1;
+	});
+
+}
+function f7(){
+	//sort()는 기본적으로 문자열sort
+	var arr = [10,50,100,20,70];
+	arr.sort();
+	here.innerHTML += "<hr>" + arr;
+	
+	//index는 0,1,2,3,4,5
+	for(var index in arr){
+		var data = arr.pop();
+		here.innerHTML += "<hr>" + index + "->" + data;
+	}
+	var arr = [10,50,100,20,70];
+	//here.innerHTML += "<hr>" + arr;
+	//arr.splice(2,1);
+	Array.prototype.remove = function(index){
+		this.splice(index,1);
+	};
+	arr.remove(1);
+	here.innerHTML += "<hr>" + arr;
+	//10,100,20,70
+	//100,20,70
+	//20,70
+	//70
+	//
+	while(true){
+		arr.remove(0);
+		if(arr.length == 0) break;
+	}
+	here.innerHTML += "<hr>!" + arr;
+}
+function f8(){
+	here.innerHTML += Math.max(1,2,3,4,5);
+}
+function f9(){
+	var arr = [10,20,30,40];
+	here.innerHTML = arr.indexOf(30); //2
+	here.innerHTML += "<hr>" + arr.indexOf(66); //-1
+	//들어온 data 갯수만큼 looping하면서 처리한다.
+	arr.forEach(function(element, index, array) {
+		here.innerHTML += "<hr>" + element + "-> 순서" + index;
+	});
+	//map은 들어온 data가 변형되어 return된다.
+	arr = arr.map(function(elt,i,array){
+		here.innerHTML += "<hr>" + arr;
+		return elt/10;
+	})
+	here.innerHTML += "<hr>" + arr;
+
+	//filter
+	var arr = [1,2,3,4,5];
+	arr = arr.filter(function (elt,i,array){
+		return elt%2==0;
+	});
+	here.innerHTML += "<hr>" + arr;
+
+	var arr = [1,2,3,4,5];
+	arr.reduce(function (previous, current, i, array){
+		here.innerHTML += "<br>" + previous + "...." + current + "...." + i;
+		return current;
+	})
+}
+function f10(){
+	//JSON
+	//JavaScript Object 형태의 문자열
+	var obj = {name:"홍길동", age:20, 군필:true,
+				toJSON:function (){return {"key":"value"};}
+	};
+	var str = JSON.stringify(obj);
+	console.dir(obj);
+	console.log(str);
+	var obj2 = JSON.parse(str);
+	console.dir(obj);
+}
+</script>
+</head>
+<body>
+<h1>object연습</h1>
+	<button id="btn1">object1</button>
+	<button id="btn2">기본형과 object</button>
+	<button id="btn3">object3</button>
+	<button id="btn4">String</button>
+	<button id="btn5">Array</button>
+	<button id="btn6">Array-sort</button>
+	<button id="btn7">Array-요소제거</button>
+	<button id="btn8">Math</button>
+	<button id="btn9">Array-ECMAScript</button>
+	<button id="btn10">JSON(JavaScript Object Notation)</button>
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>

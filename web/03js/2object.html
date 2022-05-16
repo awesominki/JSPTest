@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+span {
+	color: blue
+}
+</style>
+<script type="text/javascript">
+	//var name = "kosta";
+	var arr = [ 100, 99, 88 ];
+	var obj = {
+		name : "홍길동",
+		age : 20,
+		address : "ddd",
+		군필:true,
+		phone:["0123345678","01012345678"],
+		score:{"자바":100,"자바스크릡트":90},
+		study: function(){alert("함수이다.");}, //메서드(object내의 함수)
+		study2: function(subject){
+				//here.innerHTML += "<br>" +name2;
+				here.innerHTML += "<hr>" +this.name;
+				
+		}
+	}; //name,age,address: 키 /홍길동 20 ddd 값
+	
+	function call2(){
+		for(var index in arr){
+			here.innerHTML += "<br>" +arr[index];
+		}
+		for(var key in obj){
+			here.innerHTML += "<br>" + key + ":" + typeof(obj[key]) +  "->" + obj[key];
+			if(typeof(obj[key]) ==="function" &&"study2"){
+				obj[key]("javascript");
+			}
+		}
+		for(var pro of arr){
+			here.innerHTML += "<br>" + pro;
+		}
+	}
+
+	function call3(){
+	for(var key in obj){
+		here.innerHTML += "<br>" + key;	
+	}
+	
+		//객체안에 속성이 값이 있는지 확인하는 방법
+		here.innerHTML += "<br>" + (name in window);
+		here.innerHTML += "<br>" + Boolean('');
+		here.innerHTML += "<br>" + Boolean('aaaa');
+	}
+	function call4(){
+		var obj2 = {name : "홍길동"};
+		obj2.age = 30;
+		obj2.major = "컴공";
+		obj2.major = "항공";
+		obj2.name = "김영진";
+		
+		/*for(var key in obj2){
+			here.innerHTML += "<br>" + key + "->" + obj2[key];	
+		}*/
+		obj2.toString = function(){
+			var str = "";
+		for(var key in this){
+			str += "<br>" + key + "->" + obj2[key];	
+		}  //재정의
+		return str;
+		};
+		here.innerHTML += "<br>" + obj2;
+	}
+	
+
+
+	function call5(){ //배열 []
+		var student = [{name:"홍길동",java:100,sql:90,js:80},
+			   {name:"오길동",java:90,sql:20,js:30}
+				];
+	student.push({name:"고길동",java:200,sql:902,js:180}); //나중에 추가할때
+	student.push({name:"길동",java:400,sql:920,js:802}); //나중에 추가할때
+	student.push({name:"홍동",java:500,sql:950,js:805}); //나중에 추가할때
+
+	for(var index in student){
+	student[index].getSum = function(){return this.java+this.sql+this.js;}; //get은 얻는거니까 return이있다.
+	student[index].getAvg = function(){return this.getSum()/3;};
+		here.innerHTML += "<br> <span>이름</span>" + student[index]["name"] + "<span>총점=</span>" + student[index].getSum() + "<span>평균=</span>" + student[index].getAvg();
+	}
+	
+	}
+	
+	function call6(){
+		var arr = [];
+		arr.push ( new Student("김김",100,80,20) );
+		arr.push ( new Student("이이",1050,810,220) );
+		arr.push ( new Student("이김",1020,804,420) );
+		arr.push ( new Student("아아",1030,803,620) );
+		arr.push ( new Student("김오",1040,850,720) );
+		//같은생성자함수를 이용해서 만든 객체들이 공유하는 공간 :prototype
+		Student.prototype.getSum = function(){return this.java + this.sql + this.js;};
+		Student.prototype.getAvg = function(){return this.getSum()/3;};
+		Student.prototype.toString = function(){return "<br> <span>이름</span>" + this["name"] + 
+												"<span>총점=</span>" + this.getSum() + 
+												"<span>평균=</span>" + this.getAvg();
+												}
+		for(var index in arr){
+				here.innerHTML += arr[index];
+			}
+	}
+	function Student(name,java,sql,js){
+		this.name = name;
+		this.java = java;
+		this.sql = sql;
+		this.js = js;
+
+	}
+	
+	window.onload = function() { //load가 끝난 후 수행해라. window는 전체를 뜻함 onload는 전체에대한 속성	
+		btn2.onclick = call2;
+		btn3.onclick = call3;
+		btn4.onclick = call4;
+		btn5.onclick = call5;
+		btn6.onclick = call6;
+		btn1.onclick = function(){
+			here.innerHTML += "<br>" + arr[0];
+			here.innerHTML += "<br>" + obj.name;
+			here.innerHTML += "<br>" + obj.age;
+			here.innerHTML += "<br>" + obj.address;
+		};
+	};
+</script>
+</head>
+<body>
+	<h1>object연습</h1>
+	<button id="btn1">object1</button>
+	<button id="btn2">object2</button>
+	<button id="btn3">object3</button>
+	<button id="btn4">object 동적속성추가</button>
+	<button id="btn5">배열과오브젝트</button>
+	<button id="btn6">생성자함수</button>
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>
