@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<style>
+.aa{ background-color: lime;}
+.bb{ background-color: pink;}
+</style>
+<script>
+ //$를 사용하지않겠다.(javascript라이브러리들이 $사용많음
+ //$충돌발생)
+ //$대신에 jQuery로 사용한다. 
+ $.noConflict();
+
+ jQuery(function(){
+	 //alert("jquery ok");
+	 
+	 jQuery("#btn1").click(function(){
+		 var arr = ["월요일", "화요일", "토요일", "일요일"];
+		 //자바스크립트
+		 var output = "<h2>JavaScript</h2><ul>";
+		 arr.forEach(function(elt, i, array) {
+		 	 output += "<li>" + elt + "</li>";
+		 });
+		 here.innerHTML = output + "</ul>";
+		 
+		 //jQuery
+		 var output = jQuery("#here").html()+ 
+		              "<h2>jQuery</h2><ul>";
+		 jQuery.each(arr, function(i, elt) {
+			 output += "<li>" + elt + "</li>";
+		 });
+		 jQuery("#here").html(output + "</ul>");
+	 });
+	 
+	 jQuery("#btn2").click(function(){
+		 var output = "";
+		 jQuery("li").each(function(i, element) {
+			 output += jQuery(element).text();
+		 });
+		 output = jQuery("#here").html() + "<hr>" + output;
+		 jQuery("#here").html(output);
+		 
+	 });
+	 
+	 jQuery("#btn3").click(function(){	 
+		 jQuery("li").each(function(i, element) {
+		 	if(i%2==0){
+		 		jQuery(this).addClass("aa");
+		 	}else{
+		 		jQuery(this).addClass("bb");
+		 	}
+		 });
+	 });
+	 
+	 jQuery("#btn4").click(function(){
+		 var obj1 = {name:"홍길동"};
+		 obj1.age=20;
+		 var obj2 = {address:"금천구 가산디지털", phone:"010-1234-5678"};
+		 
+		 jQuery.extend(obj1, obj2, {"major":"컴공"});
+		 console.log(obj1);
+		 jQuery("#here").html( JSON.stringify(obj1) );
+		 
+		 var output="";
+		 jQuery.each(obj1, function(key, value) {
+			 output += "<br>" + key + "==>" + value;
+		 });
+		 jQuery("#here").html( jQuery("#here").html()+ output);
+	 });
+	 
+ });
+</script>
+</head>
+<body>
+<h1>jQuery연습</h1>
+<button id="btn1">배열(선언된변수)</button>
+<button id="btn2">배열(selector)</button>
+<button id="btn3">배열(selector)</button>
+<button id="btn4">object</button>
+<hr>
+<div id="here">여기</div>
+</body>
+</html>

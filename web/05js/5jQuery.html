@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        var obj = {"background-color":"orange",color:"blue"};
+        $(function (){
+           $("#btn1").on("click", f1);
+            $("#btn2").on("click", f2);
+            $("#btn3").on("click", f3);
+            $("#btn4").on("click", f4);
+            $("#btn6").on("click", f6);
+            $("#btn7").on("click", f7);
+            $("#btn8").on("click", f8);
+        });
+        function f1(){
+            //h1 태그중에 짝수번째만 고르기
+            $("h1:even").css(obj);
+        }
+        function f2(){
+            $("h1").filter(":even").css(obj);
+        }
+        function f3(){
+            $("h1").filter(function (index){
+                return index%3==0;
+            }).css(obj);
+        }
+        function f4(){
+            $("h1:nth-child(3n)").css(obj);
+        }
+        function f6(){
+            $("h1").css("border", "1px solid gray")
+                .filter(":even").css("background-color","beige").end()
+                .filter(":odd").css("background-color","red");
+        }
+        function f7(){
+            $("h1").first().css("border", "1px solid gray");
+            $("h1:first").css("background-color","beige");
+
+            $("h1").last().css("border", "1px solid gray");
+            $("h1:last").css("background-color","beige");
+            $("h1").eq(-1).css("color", "red");
+
+            $("h1").eq(2).css("color", "red");
+        }
+        function f8(){
+            var str = `
+                        <friends>
+                            <friend>
+                                <name>홍길동1</name>
+                                <phone>01012345678</phone>
+                            </friend>
+                            <friend>
+                                <name>홍길동2</name>
+                                <phone>01011111111</phone>
+                            </friend>
+                            <friend>
+                                <name>홍길동3</name>
+                                <phone>01033333333</phone>
+                            </friend>
+
+                        </friends>`;
+            var obj = $.parseXML(str);
+            console.log(str);
+            console.log(obj);
+            $(obj).find("friend").each(function (index){
+                console.log($(this).find("name").text());
+                console.log($(this).find("phone").text());
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>jQuery연습1</h1>
+<h1>jQuery연습2</h1>
+<h1>jQuery연습3</h1>
+<h1>jQuery연습4</h1>
+<h1>jQuery연습5</h1>
+<h1>jQuery연습6</h1>
+<h1>jQuery연습7</h1>
+<h1>jQuery연습8</h1>
+<h1>jQuery연습9</h1>
+
+<button id="btn1">filter1</button>
+<button id="btn2">filter2</button>
+<button id="btn3">filter3</button>
+<button id="btn4">filter4</button>
+<button id="btn6">체이닝과 엔드</button>
+<button id="btn7">first,last,eq</button>
+<button id="btn8">xml parsing</button>
+<hr>
+<div id="here">여기</div>
+</body>
+</html>
